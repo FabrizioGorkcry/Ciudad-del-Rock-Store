@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/style.css">
+    <script src="JS/script.js"></script>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html">
+            <img class="header__logo" src="img/logo.png" alt="logotipo">
+        </a>
+    </header>
+
+    <nav class="navegacion">
+        <a class="navegacion__enlace" href="index.html" data-page="index">Tienda</a>
+        <a class="navegacion__enlace" href="nosotros.html" data-page="nosotros">Nosotros</a>
+        <a class="navegacion__enlace" href="carrito.html" data-page="carrito">Carrito</a>
+    </nav>
+
+    <main class="contenedor">
+        <h1>Carrito de Compras</h1>
+        <div id="carrito"></div>
+        <button id="vaciar-carrito">Vaciar Carrito</button>
+    </main>
+    <script src="JS/carrito.js"></script>
+
+    <section class="contacto">
+        <h2>Dirección y Contacto</h2>
+        <div class="contacto__grid">
+            <div class="contacto__info">
+                <h3>Ubicación</h3>
+                <p>📍 Av. Rockera 666, Rancagua, Chile</p>
+                <p>🕒 Horario: Lunes a Viernes 10:00 - 19:00</p>
+            </div>
+            <div class="contacto__info">
+                <h3>Contáctanos</h3>
+                <p>📞 Teléfono: +56 9 1234 5678</p>
+                <p>✉️ Email: contacto@ciudaddelrock.com</p>
+                <p>📱 Instagram: @ciudaddelrock</p>
+            </div>
+        </div>
+    </section>    
+
+</body>
+</html>

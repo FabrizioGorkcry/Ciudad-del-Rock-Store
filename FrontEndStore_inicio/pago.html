@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/style.css">
+    <script src="JS/script.js"></script>
+</head>
+
+<header>
+    <header class="header">
+        <a href="index.html">
+            <img class="header__logo" src="img/logo.png" alt="logotipo">
+        </a>
+    </header>
+</header>
+
+<nav class="navegacion">
+    <a class="navegacion__enlace" href="index.html" data-page="index">Tienda</a>
+    <a class="navegacion__enlace" href="nosotros.html" data-page="nosotros">Nosotros</a>
+    <a class="navegacion__enlace" href="carrito.html" data-page="carrito">Carrito</a>
+</nav>
+
+<body>
+    <header>
+        <h1 class="casi">¡Ya casi!</h1>
+        <h3 class="apunto">Estas a punto de llevar el rock tanto en las venas como en tu outfit.</h3>
+    </header>
+
+    <div class="pago-container">
+        <h2>Finalizar Pago</h2>
+
+        <div class="pago-contenido">
+            <div class="resumen_txt">
+                <p class="resumen">Resumen del pedido</p>
+                <p><strong>Total de productos:</strong> <span id="total-productos">0</span></p>
+                <p><strong>Total a pagar:</strong> <span id="total-pago">$0</span></p>
+            </div>
+
+            <!-- Formulario de pago -->
+            <form id="formulario-pago">
+                <label for="nombre">Nombre en la tarjeta</label>
+                <input type="text" id="nombre" required>
+
+                <label for="tarjeta">Número de tarjeta</label>
+                <input type="text" id="tarjeta" placeholder="XXXX-XXXX-XXXX-XXXX" required>
+
+                <label for="vencimiento">Fecha de vencimiento</label>
+                <select id="vencimiento-mes">
+                    <option value="" disabled selected>Mes</option>
+                    <script>
+                        for (let i = 1; i <= 12; i++) {
+                            document.write(`<option value="${i}">${i}</option>`);
+                        }
+                    </script>
+                </select>
+                <select id="vencimiento-año">
+                    <option value="" disabled selected>Año</option>
+                    <script>
+                        let actual = new Date().getFullYear();
+                        for (let i = 0; i < 10; i++) {
+                            document.write(`<option value="${actual + i}">${actual + i}</option>`);
+                        }
+                    </script>
+                </select>
+
+                <label for="cvv">Código CVV</label>
+                <input type="text" id="cvv" placeholder="xxx" maxlength="3" required>
+
+                <button type="submit" class="boton-pagar">Pagar</button>
+            </form>
+        </div>
+    </div>
+
+    <section class="contacto">
+        <h2>Dirección y Contacto</h2>
+        <div class="contacto__grid">
+            <div class="contacto__info">
+                <h3>Ubicación</h3>
+                <p>📍 Av. Rockera 666, Rancagua, Chile</p>
+                <p>🕒 Horario: Lunes a Viernes 10:00 - 19:00</p>
+            </div>
+            <div class="contacto__info">
+                <h3>Contáctanos</h3>
+                <p>📞 Teléfono: +56 9 1234 5678</p>
+                <p>✉️ Email: contacto@ciudaddelrock.com</p>
+                <p>📱 Instagram: @ciudaddelrock</p>
+            </div>
+        </div>
+    </section>    
+
+</body>
+</html>
+
