@@ -12,7 +12,7 @@ function actualizarCarrito() {
 
     let totalCantidad = carrito.reduce((sum, p) => sum + Number(p.cantidad), 0);
     let totalPrecio = carrito.reduce((sum, p) => sum + (Number(p.precio) * Number(p.cantidad)), 0);
-    
+    console.log(carrito)
 
     carritoDiv.innerHTML = `
     <table class="carrito-tabla">
@@ -33,7 +33,7 @@ function actualizarCarrito() {
                     <td>${p.nombre}</td>
                     <td>${p.talla}</td>
                     <td>${p.cantidad}</td>
-                    <td>$${p.precio * p.cantidad}</td>
+                    <td>${formatearPrecioCLP(p.precio * p.cantidad)}</td>
                     <td><button onclick="eliminarProducto(${index})">Eliminar</button></td>
                 </tr>
             `).join("")}
@@ -41,7 +41,7 @@ function actualizarCarrito() {
     </table>
     <div class="carrito-resumen">
         <p><strong>Total de productos:</strong> ${totalCantidad}</p>
-        <p><strong>Total a pagar:</strong> $${totalPrecio}</p>
+        <p><strong>Total a pagar:</strong> ${formatearPrecioCLP(totalPrecio)}</p>
         <button id="pagar-btn">Pagar</button>
     </div>
     `;
@@ -72,3 +72,20 @@ document.getElementById("vaciar-carrito").addEventListener("click", () => {
     localStorage.removeItem("carrito");
     actualizarCarrito();
 });
+
+function formatearPrecioCLP(precioInt) {
+    // Verificar si el precio es un número entero válido
+    if (!Number.isInteger(precioInt)) {
+      return "Precio inválido";
+    }
+  
+    // Utilizar Intl.NumberFormat para formatear a moneda chilena
+    const formatter = new Intl.NumberFormat('es-CL', {
+      style: 'currency',
+      currency: 'CLP',
+      minimumFractionDigits: 0, // Opcional: Mínimo de dígitos decimales
+      maximumFractionDigits: 0, // Opcional: Máximo de dígitos decimales
+    });
+  
+    return formatter.format(precioInt);
+}

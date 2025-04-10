@@ -1,5 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    console.log("carrito")
+    let totalCantidad = carrito.reduce((sum, p) => sum + Number(p.cantidad), 0);
+    let totalPrecio = carrito.reduce((sum, p) => sum + (Number(p.precio) * Number(p.cantidad)), 0);
 
+    const totalProductos = document.getElementById("total-productos");
+    totalProductos.textContent = totalCantidad
+    const totalPagar = document.getElementById("total-pago");
+    totalPagar.textContent = formatearPrecioCLP(totalPrecio)
     const anioSelect = document.getElementById("anio");
     const anioActual = new Date().getFullYear();
     for (let i = 0; i < 10; i++) {
@@ -28,4 +36,23 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.removeItem("carrito"); 
         window.location.href = "index.html"; 
     });
+
+
+    function formatearPrecioCLP(precioInt) {
+        // Verificar si el precio es un número entero válido
+        if (!Number.isInteger(precioInt)) {
+          return "Precio inválido";
+        }
+      
+        // Utilizar Intl.NumberFormat para formatear a moneda chilena
+        const formatter = new Intl.NumberFormat('es-CL', {
+          style: 'currency',
+          currency: 'CLP',
+          minimumFractionDigits: 0, // Opcional: Mínimo de dígitos decimales
+          maximumFractionDigits: 0, // Opcional: Máximo de dígitos decimales
+        });
+      
+        return formatter.format(precioInt);
+    }
+    
 });

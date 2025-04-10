@@ -1,9 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(window.location.search);
+    const idParamUrl = params.get("id")
+    const productoSelected = dataProducto.find(item => item.id == idParamUrl);
 
-    document.getElementById("producto-nombre").textContent = params.get("nombre");
-    document.getElementById("producto-imagen").src = params.get("imagen");
-    document.getElementById("producto-precio").textContent = `$${params.get("precio")}`;
+    document.getElementById("producto-banda").textContent = productoSelected.banda;
+    document.getElementById("producto-imagen").src = productoSelected.imagen;
+    document.getElementById("producto-precio").textContent = formatearPrecioCLP(productoSelected.precio);
+    document.getElementById("producto-diseno").textContent = productoSelected.diseño;
+    document.getElementById("producto-descripcion").textContent = productoSelected.descripcion;
 
     document.getElementById("agregar-carrito").addEventListener("click", () => {
         let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
@@ -21,9 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         const producto = {
-            nombre: params.get("nombre"),
-            imagen: params.get("imagen"),
-            precio: params.get("precio"),
+            nombre: productoSelected.banda,
+            imagen: productoSelected.imagen,
+            precio: productoSelected.precio,
             talla,
             cantidad
         };
@@ -38,5 +42,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
         localStorage.setItem("carrito", JSON.stringify(carrito));
         alert("Producto agregado al carrito.");
-    });
+    }); 
+
+    function formatearPrecioCLP(precioInt) {
+        // Verificar si el precio es un número entero válido
+        if (!Number.isInteger(precioInt)) {
+          return "Precio inválido";
+        }
+      
+        // Utilizar Intl.NumberFormat para formatear a moneda chilena
+        const formatter = new Intl.NumberFormat('es-CL', {
+          style: 'currency',
+          currency: 'CLP',
+          minimumFractionDigits: 0, // Opcional: Mínimo de dígitos decimales
+          maximumFractionDigits: 0, // Opcional: Máximo de dígitos decimales
+        });
+      
+        return formatter.format(precioInt);
+    }
+    
 });
